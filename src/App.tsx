@@ -1,10 +1,8 @@
 import React from "react";
 import { InsertImage } from "./pages/InsertImage";
-
+import { SuccessLoad } from "./pages/SuccessLoad";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
 import "./styles/global.css";
-import { LoadImage } from "./pages/LoadImage";
 
 function App() {
   return (
@@ -12,7 +10,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<InsertImage />} />
-          <Route path="/load" element={<LoadImage />} />
+          <Route path="/success" element={<SuccessLoad />} />
         </Routes>
       </BrowserRouter>
     </div>

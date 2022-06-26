@@ -8,3 +8,9 @@
   line-height: 17px;
   color: #a9a9a9;
 }
+
+.footer > a {
+  font-weight: bold;
+  text-decoration: none;
+  color: #a9a9a9;
+}
