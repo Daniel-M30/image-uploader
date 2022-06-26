@@ -6,8 +6,9 @@ import { MainContainer } from "../components/MainContainer";
 
 import "../styles/pages/InsertImage.css";
 import { DragDrop } from "../components/DragDrop";
-import { api } from "../libs/api";
+import { api, canceltoken } from "../libs/api";
 import { LoadImage } from "./LoadImage";
+import { toast } from "react-toastify";
 
 export function InsertImage() {
   const [file, setFile] = useState<File | null>(null);
@@ -24,14 +25,21 @@ export function InsertImage() {
   useEffect(() => {
     async function uploadImage() {
       if (file) {
-        const body = new FormData();
-        body.append("file", file);
-        const { data } = await api.post("/upload", body);
-        navigate("/success", {
-          state: {
-            fileUpload: data.data,
-          },
-        });
+        try {
+          const body = new FormData();
+          body.append("file", file);
+          const { data } = await api.post("/upload", body, {
+            cancelToken: canceltoken.token,
+          });
+
+          navigate("/success", {
+            state: {
+              fileUpload: data.publicUrl,
+            },
+          });
+        } catch (e) {
+          toast.error("Error in upload.");
+        }
 
         setFile(null);
       }

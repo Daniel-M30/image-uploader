@@ -5,6 +5,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 import checkCircle from "../assets/check-circle-solid.svg";
 import "../styles/pages/SuccessLoad.css";
+import { toast } from "react-toastify";
 
 export function SuccessLoad() {
   const navigate = useNavigate();
@@ -14,7 +15,7 @@ export function SuccessLoad() {
   useEffect(() => {
     const state = location.state as any;
     if (state && state.fileUpload) {
-      setUrl(state.fileUpload.original_url);
+      setUrl(state.fileUpload);
       return;
     }
 
@@ -23,6 +24,7 @@ export function SuccessLoad() {
 
   function _handleCopyButton() {
     navigator.clipboard.writeText(url);
+    toast.success("Copy to clipboard successfully!");
     navigate("/");
     location.state = null;
   }

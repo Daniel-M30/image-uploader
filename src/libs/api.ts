@@ -4,4 +4,6 @@ const api = axios.create({
   baseURL: "http://localhost:3333",
 });
 
-export { api };
+const canceltoken = axios.CancelToken.source();
+
+export { api, canceltoken };
